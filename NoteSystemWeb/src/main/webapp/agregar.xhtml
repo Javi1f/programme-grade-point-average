@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<div
+			style="display: flex; justify-content: center; align-items: center; height: 80vh; width: 100%">
+			<p:panel header="Calcular promedio"
+				style="text-align: center;margin-bottom: 20px; width: 100%;font-size: 18px">
+				<h:panelGrid columns="4" cellpadding="5" styleClass="mb-3"
+					style="text-align: center;margin-bottom: 20px; width: 25%;margin-left: 37%;margin-top: 10px">
+					<h:outputLabel for="txt0" value="Usuario" style="margin-top: 10px" />
+					<p:inputText id="txt0" value="#{notesBean.notes.name}"
+						required="true" label="Text 0" style="margin-top: 10px">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="txt0" />
+					<h:outputText value="#{notesBean.notes.name}" styleClass="mt-4" />
+
+					<h:outputLabel for="txt1" value="Nota 1 (30%)"
+						style="margin-top: 10px" />
+					<p:inputNumber id="txt1" value="#{notesBean.notes.note1}"
+						required="true" label="Text 1" minValue="0" maxValue="5"
+						style="margin-top: 10px">
+						<f:validateLength minimum="2" />
+					</p:inputNumber>
+					<p:message for="txt1" />
+					<h:outputText value="#{notesBean.notes.note1}" styleClass="mt-4" />
+
+					<h:outputLabel for="txt2" value="Nota 2 (30%)"
+						style="margin-top: 10px" />
+					<p:inputNumber id="txt2" value="#{notesBean.notes.note2}"
+						required="true" label="Text 2" minValue="0" maxValue="5"
+						style="margin-top: 10px" />
+					<p:message for="txt2" />
+					<h:outputText value="#{notesBean.notes.note2}" styleClass="mt-4" />
+
+					<h:outputLabel for="txt3" value="Nota 3 (40%)"
+						style="margin-top: 10px" />
+					<p:inputNumber id="txt3" value="#{notesBean.notes.note3}"
+						required="true" label="Text 3" minValue="0" maxValue="5"
+						style="margin-top: 10px" />
+					<p:message for="txt3" />
+					<h:outputText value="#{notesBean.notes.note3}" styleClass="mt-4" />
+
+					<h:outputLabel for="txt4" value="Promedio" style="margin-top: 10px" />
+					<p:inputNumber id="txt4" value="#{notesBean.notes.promedio}"
+						required="true" label="Text 4" disabled="true"
+						style="margin-top: 10px">
+						<f:validateLength minimum="2" />
+						</p:inputNumber>
+						<p:message for="txt4" />
+						<h:outputText value="#{notesBean.notes.promedio}"
+							styleClass="mt-4" />
+				</h:panelGrid>
+
+				<p:commandButton update="@(form)"
+					value="Calcular promedio y guardar" styleClass="mr-2"
+					onclick="agregarValores();" action="#{notesBean.calcularPromedio}"
+					style="margin-top: 10px; font-size: 18px" />
+			</p:panel>
+		</div>
+	</h:form>
+
+	<script>
+		function agregarValores() {
+			let num1 = parseFloat(document.getElementById('form:txt1').value);
+			let num2 = parseFloat(document.getElementById('form:txt2').value);
+			let num3 = parseFloat(document.getElementById('form:txt3').value);
+
+			let promedio = calcularPromedioConPorcentajes(num1, num2, num3);
+
+			document.getElementById('form:txt4').value = promedio;
+		}
+
+		function calcularPromedioConPorcentajes(num1, num2, num3) {
+			// Verificar si los argumentos son números
+			if (typeof num1 !== 'number' || typeof num2 !== 'number'
+					|| typeof num3 !== 'number') {
+				throw new Error('Todos los argumentos deben ser números.');
+			}
+
+			// Calcular el promedio con porcentajes
+			let promedio = (num1 * 0.3 + num2 * 0.3 + num3 * 0.4);
+
+			return promedio;
+		}
+	</script>
+
+</ui:composition>

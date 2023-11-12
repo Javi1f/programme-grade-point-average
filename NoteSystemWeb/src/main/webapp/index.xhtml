@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" href="css/theme.css"></link>
+	<title>Note System</title>
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			$('#btnAgregar').click(function() {
+				$('#agregar-contenido').show();
+				$('#mostrar-contenido').hide();
+			});
+
+			$('#btnMostrar').click(function() {
+				$('#agregar-contenido').hide();
+				$('#mostrar-contenido').show();
+			});
+		});
+	</script>
+</h:head>
+<h:body>
+	<div
+		style="border: 1px solid #ccc; background-color: #7cc240; margin: 10px 0; padding: 10px; display: flex; align-items: center; justify-content: space-between; text-align: center; margin-left: 0; margin-right: 0;">
+		<h2
+			style="margin: 0; color: #ffffff; font-size: 34px; font-family: 'Roboto', sans-serif">Note
+			System Universidad El Bosque</h2>
+		<div style="display: flex; align-items: center">
+			<h:commandButton id="btnAgregar" value="Agregar notas"
+				style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 18px; margin-right: 24px;"
+				onmouseover="this.style.color='#808080'"
+				onmouseout="this.style.color='#ffffff'"
+				action="#{ButtonsBean.showComposition1}" />
+
+			<h:commandButton id="btnMostrar"
+				value="Mostrar los promedios de programación II"
+				onmouseover="this.style.color='#808080'"
+				onmouseout="this.style.color='#ffffff'"
+				onclick="mostrarOcultarDiv()"
+				style="background: none; border: none; color: #ffffff; cursor: pointer; font-size: 18px;"
+				action="#{ButtonsBean.showComposition2}" />
+		</div>
+	</div>
+
+	<div id="agregar-contenido" style="display: block">
+		<ui:include src="agregar.xhtml"></ui:include>
+	</div>
+	<div id="mostrar-contenido">
+		<ui:include src="mostrar.xhtml"></ui:include>
+	</div>
+
+
+
+
+	<div
+		style="position: fixed; bottom: 0; left: 0; width: 99.2%; text-align: center; margin: 6px;">
+		<p
+			style="font-family: 'Arial Rounded MT Bold', sans-serif; color: #515151; font-size: 14px">Autores:
+			Joann Alejandro Zamudio, Javier Felipe Meza | Github: JoannZamudio11,
+			Javi1f</p>
+
+	</div>
+
+
+</h:body>
+</html>
